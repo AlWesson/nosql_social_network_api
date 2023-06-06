@@ -1,7 +1,6 @@
 const {Schema, model, Types} = require('mongoose'); 
 
 
-//
 const userSchema = new Schema ({
     username: {
         type: String,
@@ -13,7 +12,7 @@ const userSchema = new Schema ({
         type: String,
         required: true,
         unique: true,
-        match: [/.+@.+\..+/],
+        match: [/.+@.+\..+/], // using regex to match email address
     },
     friends: [
         {
