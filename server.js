@@ -1,5 +1,5 @@
 const express = require('express');
-const db = requier('./config/connection');
+const db = require('./config/connection');
 const routes = require('./routes');
 
 // set environment variables
@@ -16,6 +16,6 @@ app.use(routes);
 // connect to mongodb/start server.
 db.once('open', () => {
     app.listen(PORT, () => {
-        console.log(`API server running on poty ${PORT}`);
+        console.log(`API server running on port ${PORT}`);
     });
 });
