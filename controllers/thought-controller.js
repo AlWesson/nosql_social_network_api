@@ -82,7 +82,7 @@ module.exports = {
         }
     },
 
-    //
+    // find thought by id and pull reaction
     async deleteReaction(req, res) {
         try{
             const thought = await Thought.findByIdAndUpdate(
