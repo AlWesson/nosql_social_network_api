@@ -13,7 +13,7 @@ const thoughtSchema = new Schema(
             type: Date,
             default: Date.now,
             // gets Date obj. as a string using locale settings
-            get: timestamp => new Date(timestamp).toLocateString(),
+            get: timestamp => new Date(timestamp).toLocaleString(),
             
         },
         username:{
@@ -37,4 +37,4 @@ thoughtSchema.virtual('reactionCount').get(function () {
 
 const Thought = model('Thought', thoughtSchema);
 
-module.exports = Thought;
+module.exports = Thought

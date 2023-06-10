@@ -1,4 +1,5 @@
-const { Thought, User, Reaction} = require('../models');
+
+const { Thought, User, reactionSchema } = require('../models');
 
 module.exports = {
     
@@ -18,9 +19,10 @@ module.exports = {
         try{
             const thought = await Thought.findOne({_id: req.params.thoughtId});
             if(!thought){
-                return res.status(404).json({message: "Thought not found"});
+                res.status(404).json({message: "Thought not found"});
             }
-            res.json(thought);
+            else{res.json(thought);}
+            
         }
         catch(err){
             res.status(500).json(err);
@@ -28,10 +30,10 @@ module.exports = {
     },
     
     // create a new thought
-    async createThough(req, res) {
+    async createThought(req, res) {
         try{
-            const thought = Thought.create(req.body);
-            req.json(thought);
+            const thought = await Thought.create(req.body);
+            req.status(200).json(thought);
         }
         catch(err){
             res.status(500).json(err);
@@ -39,9 +41,9 @@ module.exports = {
     },
 
     // delete a thought by id
-    async deleteThough(req, res){
+    async deleteThought(req, res){
         try{
-            const thought = Thought.findByIdAndDelete({_id: req.params.thoughtId});
+            const thought = await Thought.findByIdAndDelete({_id: req.params.thoughtId});
             res.status(200).json(thought);
         }
         catch(err){
@@ -51,11 +53,12 @@ module.exports = {
     // get thought by id and update
     async updateThought(req, res){
         try{
-            const thought = Thought.findByIdAndUpdate(req.params.thoughtId, req.body, {new: true});
+            const thought = await Thought.findByIdAndUpdate(req.params.thoughtId, req.body, {new: true,});
             if(!thought){
-                return res.status(404).json({message: "Thought not found"});
+                res.status(404).json({message: "Thought was not found"});
             }
-            res.json(thought);
+            else{res.json(thought);}
+            
 
         }
         catch(err){
@@ -73,9 +76,10 @@ module.exports = {
                 new: true}
             );
             if(!thought){
-                return res.status(404).json({ message: 'Thought not found' });
+                res.status(404).json({ message: 'Thought not found' });
             }
-            res.json(thought);
+            else{res.json(thought);}
+            
         }
         catch(err){
             res.status(500).json(err);
@@ -93,12 +97,13 @@ module.exports = {
             );
 
             if(!thought){
-                return res.status(404).json({ message: 'Thought not found' });
+                res.status(404).json({ message: 'Thought not found' });
             }
-            res.json(thought);
+            else{res.json(thought);}
+            
         }
         catch(err){
             res.status(500).json(err);
         }
     },
-} ;
+};

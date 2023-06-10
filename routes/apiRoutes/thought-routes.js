@@ -3,8 +3,8 @@ const router = require('express').Router();
 const {
     gatherThoughts,
     getOneThought,
-    createThough,
-    deleteThough,
+    createThought,
+    deleteThought,
     updateThought,
     addReaction,
     deleteReaction,
@@ -15,23 +15,23 @@ const {
 router
 .route('/')
 .get(gatherThoughts)
-.post(createThough);
+.post(createThought);
 
 // route for GET, PUT, and DELETE Thought
 router
 .route('/:thoughtId')
 .get(getOneThought)
 .put(updateThought)
-.delete(deleteThough);
+.delete(deleteThought);
 
 // route for POST reactions to Thought
 router
-.route('/thoughtId/reactions')
+.route('/:thoughtId/reactions')
 .post(addReaction);
 
 // route for DELETE reactions 
 router
-.route('/thoughtId/reactions/:reactionId')
+.route('/:thoughtId/reactions/:reactionId')
 .delete(deleteReaction);
 
 module.exports = router;
