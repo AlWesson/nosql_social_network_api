@@ -3,8 +3,9 @@ const db = require('./config/connection');
 const routes = require('./routes');
 
 // set environment variables
-const PORT = process.env.PORT || 3001;
 const app = express();
+const PORT = process.env.PORT || 3001;
+
 // use middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
