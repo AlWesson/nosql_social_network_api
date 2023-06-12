@@ -1,6 +1,6 @@
 
 
-const { Thought, User, Reaction } = require('../models');
+const { Thought, User, reactionSchema } = require('../models');
 // const {Types} = require('mongoose');
 
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
         })
         .catch(err => res.status(400).json(err));
     },
-    
+    // create a thought through a specific user
     createThought(req, res){
         Thought.create(req.body)
         .then(({_id}) => {
@@ -44,7 +44,7 @@ module.exports = {
 
         
     },
-
+    //edit thought
     updateThought(req, res){
         Thought.findOneAndUpdate(
             {_id: req.params.thoughtId},
@@ -59,7 +59,7 @@ module.exports = {
         })
         .catch(err => res.status(500).json(err));
     },
-
+    // delete a user's thought
     deleteThought(req, res){ 
         Thought.findOneAndDelete({_id: req.params.thoughtId})
         .then(thought => {
@@ -74,13 +74,13 @@ module.exports = {
         })
         .then(user => {
             if(!user){
-                return res.status(404).json({message: 'Thought deleted. Thought not tied to user'});
+                return res.status(200).json({message: 'Thought deleted'});
             }
             res.json({mesasge: "Thought deleted"});
         })
         .catch(err => res.status(500).json(err));
     },
-
+    // update thought with a reaction
     addReaction(req, res) {
         Thought.findOneAndUpdate(
             {_id: req.params.thoughtId},
@@ -95,7 +95,7 @@ module.exports = {
         })
         .catch(err => res.status(500).json(err));
     },
-
+    // update thought by removing the reaction
     removeReaction(req, res) {
         Thought.findOneAndUpdate(
             {_id: req.params.thoughtId},
